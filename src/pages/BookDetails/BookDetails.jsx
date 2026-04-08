@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useLoaderData, useParams } from 'react-router';
+import { BookContext } from '../../context/BookContext';
 
 const BookDetails = () => {
     const { id } = useParams();
     const books = useLoaderData();
 
     const book = books.find((book) => book.bookId == id)
+
+    const { storedBooks, handleMarkAsRead, handleWishlist, wishlist } = useContext(BookContext);
+    const hasStoredBook = storedBooks.find((i) => i.bookId === book.bookId)
+    const hasWishlisted = wishlist.find((i) => i.bookId === book.bookId)
 
     return (
         <div className='w-[95%] lg:container mx-auto my-10 grid lg:grid-cols-2 gap-10'>
@@ -39,6 +44,22 @@ const BookDetails = () => {
                         <p>{book.yearOfPublishing}</p>
                         <p>{book.rating}</p>
                     </div>
+                </div>
+                <div className='flex gap-5'>
+                    {
+                        hasStoredBook ? (
+                            <button className="btn" disabled="disabled">✓ Added to your List</button>
+                        ) : (
+                            <button className="btn btn-outline" onClick={() => handleMarkAsRead(book)}>Mark As Read</button>
+                        )
+                    }
+                    {
+                        hasWishlisted ? (
+                            <button className="btn" disabled="disabled">Added to Wishlist</button>
+                        ) : (
+                            <button className="btn btn-soft btn-accent" onClick={() => handleWishlist(book)}>Add to Wishlist</button>
+                        )
+                    }
                 </div>
             </div>
         </div>
