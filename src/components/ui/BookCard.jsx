@@ -1,9 +1,10 @@
 import React from 'react';
 import { CiStar } from 'react-icons/ci';
+import { Link } from 'react-router';
 
 const BookCard = ({ book }) => {
     return (
-        <div className='border border-base-300 p-6 rounded-2xl shadow w-93.5 h-full'>
+        <Link to={`bookDetails/${book.bookId}`} className='border border-base-300 p-6 rounded-2xl shadow w-93.5 h-full'>
             <div className='rounded-2xl bg-base-300 py-8'>
                 <img className='w-33.5 h-41.5 mx-auto rounded-xl' src={book.image} alt="" />
             </div>
@@ -19,7 +20,7 @@ const BookCard = ({ book }) => {
                 <p>{book.category}</p>
                 <p className='flex items-center gap-2'>{book.rating} <CiStar /></p>
             </div>
-        </div>
+        </Link>
     );
 };
 
