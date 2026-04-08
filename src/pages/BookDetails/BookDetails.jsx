@@ -8,8 +8,8 @@ const BookDetails = () => {
 
     const book = books.find((book) => book.bookId == id)
 
-    const { storedBooks, handleMarkAsRead, handleWishlist, wishlist } = useContext(BookContext);
-    const hasStoredBook = storedBooks.find((i) => i.bookId === book.bookId)
+    const { readList, handleMarkAsRead, handleWishlist, wishlist } = useContext(BookContext);
+    const hasStoredBook = readList.find((i) => i.bookId === book.bookId)
     const hasWishlisted = wishlist.find((i) => i.bookId === book.bookId)
 
     return (

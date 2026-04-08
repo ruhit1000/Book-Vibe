@@ -5,17 +5,17 @@ import { toast } from 'react-toastify';
 export const BookContext = createContext();
 
 const BookProvider = ({ children }) => {
-    const [storedBooks, setStoredBooks] = useState([]);
+    const [readList, setReadList] = useState([]);
     const [wishlist, setWishlist] = useState([])
 
     const handleMarkAsRead = (currentBook) => {
-        setStoredBooks([...storedBooks, currentBook])
+        setReadList([...readList, currentBook])
         toast.success(`${currentBook.bookName} has added to your list`)
     }
     
     const handleWishlist = (currentBook) => {
 
-        const isExistInReadList = storedBooks.find((book) => book.bookId === currentBook.bookId)
+        const isExistInReadList = readList.find((book) => book.bookId === currentBook.bookId)
 
         if(isExistInReadList) {
             toast.error('Already added to your read list')
@@ -27,8 +27,8 @@ const BookProvider = ({ children }) => {
     }
 
     const data = {
-        storedBooks,
-        setStoredBooks,
+        readList,
+        setReadList,
         handleMarkAsRead,
         handleWishlist,
         wishlist
